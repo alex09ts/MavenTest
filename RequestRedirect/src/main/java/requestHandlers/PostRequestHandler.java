@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @ClassAnnotation(
-        requestClassUrl = "/PostRequest"
+        requestClassUrl = "PostRequest"
 )
 public class PostRequestHandler implements HandlerInterface {
 
@@ -24,11 +24,13 @@ public class PostRequestHandler implements HandlerInterface {
     public void redirect(HttpServletRequest req, HttpServletResponse resp){
 
         logger.info("Path /getSome method POST");
-        resp.addHeader("MethodName", "Executed method redirect from class PostRequestandler");
-
+//        resp.addHeader("MethodName", "Executed method redirect from class PostRequestandler");
+        resp.setContentType("text/html");
 
         try {
-            resp.sendRedirect("redirect2.jsp");
+            PrintWriter out = resp.getWriter();
+            out.println("<h2>Path getSome method POST</h2>");
+            out.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -42,19 +44,17 @@ public class PostRequestHandler implements HandlerInterface {
 
         logger.info("Path /getSome2 method POST");
         resp.setContentType("text/html");
-        resp.addHeader("MethodName", "Executed method redirect2 from class PostRequestHandler");
+//        resp.addHeader("MethodName", "Executed method redirect2 from class PostRequestHandler");
 
         PrintWriter out = null;
         try {
             out = resp.getWriter();
+            out.println("<h2>Path getSome2 method POST</h2>");
+            out.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        out.println("<title>Example</title>" +
-                "<body bgcolor=FFFFFF>");
 
-        out.println("<h2>Path /getSome2 method POST</h2>");
-        out.close();
     }
 }

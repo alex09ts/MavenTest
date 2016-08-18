@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @ClassAnnotation(
-        requestClassUrl = "/GetRequest"
+        requestClassUrl = "GetRequest"
 )
 public class GetRequestHandler implements HandlerInterface {
 
@@ -23,14 +23,15 @@ public class GetRequestHandler implements HandlerInterface {
     )
     public void redirect(HttpServletRequest req, HttpServletResponse resp) {
 
-        logger.info("Path /getSome method GET EXECUTED!!!");
+        logger.info("Path getSome method GET EXECUTED!!!");
+        resp.setContentType("text/html");
         try {
-            resp.addHeader("MethodName", "redirect from GetRequestHandler");
-            resp.sendRedirect("redirect.jsp");
+            PrintWriter out = resp.getWriter();
+            out.println("<h2>Path getSome method GET</h2>");
+            out.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @MethodAnnotation(
@@ -40,20 +41,16 @@ public class GetRequestHandler implements HandlerInterface {
     public void redirect2(HttpServletRequest req, HttpServletResponse resp) {
 
         logger.info("Path /getSome2 method GET");
-        resp.addHeader("MethodName", "Executed method redirect2 from class GetRequestandler");
+//        resp.addHeader("MethodName", "Executed method redirect2 from class GetRequestandler");
         resp.setContentType("text/html");
-        PrintWriter out = null;
+
         try {
-            out = resp.getWriter();
+            PrintWriter out = resp.getWriter();
+            out.println("<h2>Path getSome2 method GET</h2>");
+            out.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        out.println("<title>Example</title>" +
-                "<body bgcolor=FFFFFF>");
-
-        out.println("<h2>Path /getSome2 method GET</h2>");
-        out.close();
     }
 
     @MethodAnnotation(
@@ -62,9 +59,17 @@ public class GetRequestHandler implements HandlerInterface {
     )
     public void redirect3(HttpServletRequest req, HttpServletResponse resp) {
 
-        logger.info("Path /getSome3 method GET");
+        logger.info("Path getSome3 method GET");
         resp.addHeader("MethodName", "Executed method redirect3 from class GetRequestandler");
+        resp.setContentType("text/html");
 
+        try {
+            PrintWriter out = resp.getWriter();
+            out.println("<h2>Path getSome3 method GET</h2>");
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

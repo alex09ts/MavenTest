@@ -20,7 +20,6 @@ public class AnnotationList {
     private static final Logger logger = Logger.getLogger(GetRequestHandler.class);
     private List<Class> allClasses;
     private Map<String, Object> objectMap;
-
     public AnnotationList(List<Class> allClasses, Map<String, Object> objectMap) {
         this.allClasses = allClasses;
         this.objectMap = objectMap;
@@ -28,20 +27,23 @@ public class AnnotationList {
 
     public void checkTheClassAnnotations(HttpServletRequest request, HttpServletResponse resp) {
         logger.info("Class check");
+        String array[] = request.getServletPath().split("/");
+        String pathPart = array[1];
+        String methodPart = array[2];
         for (Class clazz : allClasses) {
             if (clazz.isAnnotationPresent(ClassAnnotation.class)) {
 
                 Annotation annotation = clazz.getAnnotation(ClassAnnotation.class);
                 ClassAnnotation ann = (ClassAnnotation) annotation;
-                logger.info(request.getServletPath() + " compare to " + ann.requestClassUrl());
-                if (request.getServletPath().equals(ann.requestClassUrl())) {
-                    checkMethods(request, resp, clazz);
+                logger.info(pathPart + " compare to " + ann.requestClassUrl());
+                if (pathPart.equals(ann.requestClassUrl())) {
+                    checkMethods(request, resp, clazz, methodPart);
                 }
             }
         }
     }
 
-    public void checkMethods(HttpServletRequest request, HttpServletResponse resp, Class clazz) {
+    public void checkMethods(HttpServletRequest request, HttpServletResponse resp, Class clazz, String methodPart) {
         logger.info("check methods");
 
         for (Method method : clazz.getDeclaredMethods()) {
@@ -50,10 +52,10 @@ public class AnnotationList {
 
                 Annotation annotation = method.getAnnotation(MethodAnnotation.class);
                 MethodAnnotation methodAnnotation = (MethodAnnotation) annotation;
-                logger.info(request.getParameter("param") + " compare to " + methodAnnotation.requestUrl());
-                logger.info(request.getParameter("param").equals(methodAnnotation.requestUrl()) &&
+                logger.info(methodPart + " compare to " + methodAnnotation.requestUrl());
+                logger.info(methodPart.equals(methodAnnotation.requestUrl()) &&
                         request.getMethod().equals(methodAnnotation.method()));
-                if (request.getParameter("param").equals(methodAnnotation.requestUrl()) &&
+                if (methodPart.equals(methodAnnotation.requestUrl()) &&
                         request.getMethod().equals(methodAnnotation.method())) {
                     try {
 

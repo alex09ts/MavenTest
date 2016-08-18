@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @ClassAnnotation(
-        requestClassUrl = "/NoRequest"
+        requestClassUrl = "NoRequest"
 )
 public class UselessRequestHandler implements HandlerInterface {
 
         @MethodAnnotation(
-                requestUrl = "/doNothing",
+                requestUrl = "doNothing",
                 method = "GET"
         )
         public void redirect(HttpServletRequest req, HttpServletResponse resp) {
