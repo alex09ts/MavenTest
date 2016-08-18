@@ -23,17 +23,21 @@ public class PathFilter implements Filter {
 
         String array[] = request.getServletPath().split("/");
         logger.info(array.length + "is array length");
-        if (array.length==3) {
-            filterChain.doFilter(request, response);
-        } else {
-            try {
-                response.setContentType("text/html");
-                PrintWriter out = response.getWriter();
+        PrintWriter out;
+        try{
+            response.setContentType("text/html");
+            out = response.getWriter();
+            if (array.length==3) {
+                out.println("Path is : "+ request.getServletPath().toString());
+                filterChain.doFilter(request, response);
+            } else {
+
                 out.println("<h2>Path is incorrect</h2>");
-                out.close();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+            out.close();
+
+        }catch (Exception ex){
+            logger.error(ex.getMessage());
         }
     }
 
