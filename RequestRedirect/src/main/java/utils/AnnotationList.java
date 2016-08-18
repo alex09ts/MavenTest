@@ -28,6 +28,9 @@ public class AnnotationList {
     public void checkTheClassAnnotations(HttpServletRequest request, HttpServletResponse resp) {
         logger.info("Class check");
         String array[] = request.getServletPath().split("/");
+        for(String s: array){
+            logger.info(s);
+        }
         String pathPart = array[1];
         String methodPart = array[2];
         for (Class clazz : allClasses) {

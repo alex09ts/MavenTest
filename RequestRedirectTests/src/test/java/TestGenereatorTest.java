@@ -41,4 +41,11 @@ public class TestGenereatorTest {
         String value = testGenereator.generatePostTest("http://google.vanka.com");
         assertEquals(false, value.contains("Path getSome method POST"));
     }
+
+    @Test
+    public void doTests_url_asd_incorrectPath() throws Exception {
+        TestGenereator testGenereator = new TestGenereator();
+        String value = testGenereator.generatePostTest("http://localhost:8080/RequestRedirect/asd");
+        assertEquals("Path is incorrect", true, value.contains("Path is incorrect"));
+    }
 }

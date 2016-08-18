@@ -5,6 +5,16 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
 
+    <filter>
+        <filter-name>PathFilter</filter-name>
+        <filter-class>filters.PathFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>PathFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>CustomServlet</servlet-name>
         <servlet-class>servlets.CustomServlet</servlet-class>
