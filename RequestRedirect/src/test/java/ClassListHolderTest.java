@@ -11,11 +11,10 @@ import static org.junit.Assert.*;
 
 public class ClassListHolderTest {
 
-    List<String> testList;
-    List<Class> testClassList;
-    ClassListHolder classListHolder;
-    Map<String,Object> testMap;
-    Map<String,Object> testMap2;
+    private List<String> testList;
+    private List<Class> testClassList;
+    private ClassListHolder classListHolder;
+    private Map<String,Object> testMap;
 
     @Before
     public void testGetClassFinderList_Package_RequestHandlers(){
@@ -27,7 +26,7 @@ public class ClassListHolderTest {
         ClassListHolder classListHolder = new ClassListHolder(testList);
         List<Class> testClassList = classListHolder.parseClassList();
         assertEquals("List must be nut null" , false ,testClassList.isEmpty());
-        assertEquals("First element of list must be class requestHandlers.GetRequestHandler" , Class.forName("requestHandlers.GetRequestHandler") , testClassList.get(0));
+        assertEquals("First element of list must be class requestHandlers.GetRequestHandler" , true , testClassList.contains(Class.forName("requestHandlers.GetRequestHandler")));
     }
 
 
