@@ -58,7 +58,7 @@
         <artifactId>maven-war-plugin</artifactId>
         <version>${apache.maven.war.plugin.version}</version>
         <configuration>
-          <outputDirectory>/opt/tomcat/webapps</outputDirectory>
+          <outputDirectory>./src/main/resources</outputDirectory>
           <warName>RequestRedirect</warName>
         </configuration>
       </plugin>
