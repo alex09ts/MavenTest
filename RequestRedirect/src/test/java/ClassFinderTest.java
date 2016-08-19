@@ -7,10 +7,24 @@ import static org.junit.Assert.*;
 
 public class ClassFinderTest {
     @Test
-    public void getPackageClassessTest_Package_RequestHandlers_FirstElementMatching() throws Exception {
+    public void getPackageClassessTest_Package_RequestHandlers_GetHandler() throws Exception {
         ClassFinder classFinder = new ClassFinder();
         List<String> testList  = classFinder.getPackageClassess("requestHandlers");
-        assertEquals("First element must be GetRequestHandler", "requestHandlers.GetRequestHandler" , testList.get(0));
+        assertEquals("First element must be GetRequestHandler", true , testList.contains("requestHandlers.GetRequestHandler"));
+    }
+
+    @Test
+    public void getPackageClassessTest_Package_RequestHandlers_PostHandler() throws Exception {
+        ClassFinder classFinder = new ClassFinder();
+        List<String> testList  = classFinder.getPackageClassess("requestHandlers");
+        assertEquals("First element must be GetRequestHandler", true , testList.contains("requestHandlers.PostRequestHandler"));
+    }
+
+    @Test
+    public void getPackageClassessTest_Package_RequestHandlers_UselessHandler() throws Exception {
+        ClassFinder classFinder = new ClassFinder();
+        List<String> testList  = classFinder.getPackageClassess("requestHandlers");
+        assertEquals("First element must be GetRequestHandler", true , testList.contains("requestHandlers.UselessRequestHandler"));
     }
 
     @Test

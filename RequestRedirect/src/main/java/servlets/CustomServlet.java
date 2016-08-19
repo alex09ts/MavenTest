@@ -6,9 +6,11 @@ import starter.InitComponents;
 import utils.AnnotationList;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class CustomServlet extends HttpServlet{
 
@@ -23,7 +25,6 @@ public class CustomServlet extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp){
-
         logger.info("Вызван метод doGet");
         logger.info(req.getPathInfo() + "  " + req.getServletPath());
         annotationList.checkTheClassAnnotations(req, resp);

@@ -2,6 +2,7 @@ package filters;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,6 +23,7 @@ public class PathFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         String array[] = request.getServletPath().split("/");
+        logger.info(request.getContextPath());
         logger.info(array.length + "is array length");
         PrintWriter out;
         try{
